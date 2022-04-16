@@ -8,7 +8,11 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "difs-unic-multiple": "node src/difs/unic-multiple.mjs",
+    "difs-eager-lazy": "node src/difs/eager-lazy.mjs",
+    "difs-unicast": "node src/difs/unicast.mjs",
+    "difs-multicast": "node src/difs/multicast.mjs",
+    "difs-cancel": "node src/difs/cancel.mjs"
   },
   "keywords": [],
   "author": "",

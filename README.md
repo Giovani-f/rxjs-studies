@@ -65,7 +65,7 @@ O ReactiveX surgiu como um conceito e obteve implementações em diversas plataf
 
 ## Observables
 
-Observables são encapsuladores de dados assim como as promises são, onde é possível encapsular um dado em obeservable para ser possível ter acesso os métodos que o rxjs disponibiliza, para manipular e recaber o dado novamente.
+Observables são encapsuladores de dados assim como as promises, onde é possível encapsular um dado em obeservable para ser possível ter acesso os métodos que o rxjs disponibiliza, para manipular e recaber o dado novamente.
 
 ### Promises vs Observables
 
@@ -88,4 +88,57 @@ Observables são encapsuladores de dados assim como as promises são, onde é po
 <td align="center">Compartilhada ( Multicast )</td>
 <td align="center">Compartilhada ou não ( Multicast/Unicast )</td>
 </tr>
+<tr>
+<td align="center">Assíncrona</td>
+<td align="center">Síncrona e ou Assíncrona</td>
+</tr>
+</tr>
+<tr>
+<td align="center">Cancelável</td>
+<td align="center">Não cancelável</td>
+</tr>
 </table>
+
+- Valor Único vs Múltiplo
+
+_As Promises emitem valores únicos enquantos os Observables emitem Múltiplos valores._
+
+- Eager vs Lazy
+
+_Na Promise o seu bloco de código é executado mesmo quando não temos ninguem para consumi-la, no caso o (.then), em outras palavras ela se resolve mesmo sem ter um then. Já em um Observable, o seu bloco de código só é executado quando há alguém o obeservando._
+
+- Multicast vs Unicast/Multicast
+
+_As promises diferentes dos Observables possuem um "estado" compartilhado, a partir do momento que declaramos um promise, o seu bloco de código é executado uma única vez e todos que obtiverem o (.then) dessa promise, receberão o valor emitido no bloco do código e o mesmo não será executado novamente._
+
+_Já um Observable executará todo o bloco de código para cada subinscrição do mesmo, porém é possível obter um comportamento semelhante com o comportamento da Promise, aplicando o operador (share)._
+
+- Async vs Async/Sync
+
+_Em Promises todos os valores emitidos são Assícronos, já em Observables todos os valores que são emitidos imediatamente são Sícronos, porém os que virão a ser emitidos são Assíncronos._
+
+- Não cancelável vs Cancelável
+
+_As Promises (nativas) não são canceláveis, já os Observables podem ser cancelados._
+
+## Subscriptions
+
+Subscription é a forma que você possui de se increver em um Observable. O method subscribe possui 3 params (callbacks), sendo o primeiro callback o próprio valor emitido por um Observable, o segundo um callback de erro e o terceiro o complete, que indica que seu observable terminou.
+
+## Subjects
+
+São um tipo especial de Observable, enquanto os Observables são por padrão Unicast, mas podem vir a ser Multicast, os Subjects sempre serão Multicast. Além disso ao mesmo tempo que os Subjects são Observables, eles também são Observers. Outro ponto é que os Subjects emitem valores independente de quem está ouvindo, ou seja, existindo ou não um inscrito ele irá emitir o valor.
+
+### BehaviorSubjects
+
+Esse tipo de Subject se inicia com um valor e ele sempre mantém o último valor para ser emitido a qualquer novo inscrito.
+
+### ReplaySubjects
+
+Esse é um tipo de Subject que armazena uma quantidade definida de valores emitidos. Por curiosidade o BehaviorSubject é um ReplaySubject com o valor 1. Porém o Replay pode receber um segundo argumento que é um tempo em milisegundos em que ele vai armazenar essa informação.
+
+_Esse tipo de subject é interessante para fazer cache._
+
+### AsyncSubjects
+
+Esse tipo de subject somente recebe a última emissão e somente se esse subject for completado.
